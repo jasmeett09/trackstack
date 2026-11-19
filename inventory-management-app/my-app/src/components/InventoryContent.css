@@ -1,0 +1,253 @@
+.inventory-content {
+  flex: 1;
+  padding: 32px;
+  overflow-y: auto;
+}
+
+.inventory-content .page-title {
+  margin: 0;
+  color: #0f172a;
+  font-size: clamp(2rem, 3vw, 2.7rem);
+}
+
+.inventory-content .section-subtitle {
+  margin: 10px 0 22px;
+  color: #64748b;
+  font-size: 0.98rem;
+}
+
+.inventory-content .error-message,
+.inventory-content .success-message {
+  padding: 14px 16px;
+  border-radius: 16px;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+
+.inventory-content .error-message {
+  background: rgba(254, 242, 242, 0.95);
+  border: 1px solid rgba(252, 165, 165, 0.45);
+  color: #dc2626;
+}
+
+.inventory-content .success-message {
+  background: rgba(240, 253, 244, 0.95);
+  border: 1px solid rgba(134, 239, 172, 0.5);
+  color: #15803d;
+}
+
+.inventory-content .inventory-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(320px, 0.95fr);
+  gap: 18px;
+}
+
+.inventory-content .items-section,
+.inventory-content .form-section {
+  padding: 24px;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.05);
+}
+
+.inventory-content .search-bar {
+  margin-bottom: 20px;
+}
+
+.inventory-content .search-input,
+.inventory-content .form-group input,
+.inventory-content .form-group select,
+.inventory-content .form-group textarea {
+  width: 100%;
+  min-height: 50px;
+  padding: 0 16px;
+  border: 1px solid #dbe3f0;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 0.94rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inventory-content .form-group textarea {
+  min-height: 110px;
+  padding: 14px 16px;
+  resize: vertical;
+}
+
+.inventory-content input[type="number"]::-webkit-outer-spin-button,
+.inventory-content input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inventory-content input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.inventory-content .search-input:focus,
+.inventory-content .form-group input:focus,
+.inventory-content .form-group select:focus,
+.inventory-content .form-group textarea:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.08);
+}
+
+.inventory-content .items-table-wrapper {
+  overflow-x: auto;
+}
+
+.inventory-content .items-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 860px;
+}
+
+.inventory-content .items-table thead {
+  background: #f8fafc;
+}
+
+.inventory-content .items-table th,
+.inventory-content .items-table td {
+  padding: 14px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.92);
+}
+
+.inventory-content .items-table th {
+  color: #475569;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.inventory-content .items-table td {
+  color: #0f172a;
+  font-size: 0.92rem;
+}
+
+.inventory-content .inventory-item-thumb {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+}
+
+.inventory-content .image-placeholder {
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+
+.inventory-content .quantity {
+  display: inline-flex;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(79, 70, 229, 0.1);
+  color: #4f46e5;
+  font-weight: 700;
+}
+
+.inventory-content .quantity.low {
+  background: rgba(254, 226, 226, 0.9);
+  color: #ef4444;
+}
+
+.inventory-content .actions-cell {
+  display: flex;
+  gap: 8px;
+}
+
+.inventory-content .edit-btn,
+.inventory-content .delete-btn,
+.inventory-content .submit-btn,
+.inventory-content .reset-btn {
+  min-height: 42px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 14px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.inventory-content .edit-btn,
+.inventory-content .submit-btn {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #ffffff;
+}
+
+.inventory-content .delete-btn {
+  background: rgba(254, 226, 226, 0.95);
+  color: #dc2626;
+}
+
+.inventory-content .reset-btn {
+  background: rgba(241, 245, 249, 0.96);
+  color: #475569;
+}
+
+.inventory-content .no-data {
+  text-align: center;
+  padding: 28px;
+  color: #64748b;
+}
+
+.inventory-content .add-item-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.inventory-content .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inventory-content .form-group label {
+  color: #0f172a;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.inventory-content .inventory-form-preview {
+  width: 100%;
+  max-width: 180px;
+  margin-top: 10px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.inventory-content .form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+@media (max-width: 1180px) {
+  .inventory-content .inventory-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .inventory-content {
+    padding: 20px 16px;
+  }
+
+  .inventory-content .items-section,
+  .inventory-content .form-section {
+    padding: 18px;
+  }
+
+  .inventory-content .actions-cell,
+  .inventory-content .form-buttons {
+    flex-direction: column;
+  }
+}

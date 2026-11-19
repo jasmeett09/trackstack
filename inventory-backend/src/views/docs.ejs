@@ -1,0 +1,57 @@
+<%- include("partials/header") %>
+
+<section class="hero">
+  <h1>API Documentation</h1>
+  <p>
+    This OpenAPI-style reference documents the multi-tenant authentication,
+    organization, and inventory APIs. Session cookie auth powers the web app,
+    and the sample JWT route is included for token-based testing.
+  </p>
+  <div class="hero-actions">
+    <a class="button" href="<%= apiSpecUrl %>" target="_blank" rel="noreferrer">Open JSON Spec</a>
+    <a class="button secondary" href="/">Back to Home</a>
+  </div>
+</section>
+
+<section class="card docs-overview">
+  <h2>Authentication Model</h2>
+  <ul class="detail-list">
+    <li><strong>Primary web auth:</strong> session cookie via <code>connect.sid</code></li>
+    <li><strong>Secondary API example:</strong> Bearer JWT via <code>Authorization: Bearer &lt;token&gt;</code></li>
+    <li><strong>Tenant isolation:</strong> all organization data is filtered by <code>organizationId</code></li>
+    <li><strong>Roles:</strong> Admin, Manager, Staff</li>
+  </ul>
+</section>
+
+<section class="grid docs-grid">
+  <% groupedEndpoints.forEach((group) => { %>
+    <article class="card docs-card">
+      <h2><%= group.title %></h2>
+      <p class="helper-text"><%= group.description %></p>
+
+      <div class="docs-endpoint-list">
+        <% group.items.forEach((item) => { %>
+          <div class="docs-endpoint-row">
+            <div class="docs-endpoint-method docs-method-<%= item.method.toLowerCase() %>"><%= item.method %></div>
+            <div class="docs-endpoint-content">
+              <code><%= item.path %></code>
+              <p><%= item.summary %></p>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </article>
+  <% }) %>
+</section>
+
+<section class="card docs-schemas">
+  <div class="page-heading">
+    <div>
+      <h2>Schema Snapshot</h2>
+      <p class="helper-text">Useful for viva, testing, and report screenshots.</p>
+    </div>
+  </div>
+  <pre class="docs-spec-preview"><code><%= JSON.stringify(spec.components.schemas, null, 2) %></code></pre>
+</section>
+
+<%- include("partials/footer") %>

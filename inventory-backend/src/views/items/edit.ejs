@@ -1,0 +1,55 @@
+<%- include("../partials/header") %>
+<section class="form-card">
+  <h1>Edit Item</h1>
+  <form action="/items/<%= item._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+    <label>Item Name</label>
+    <input type="text" name="name" value="<%= item.name %>" required />
+
+    <label>Category</label>
+    <select name="category" required>
+      <% if (!item.category) { %>
+        <option value="" selected disabled>Select category</option>
+      <% } %>
+      <% categories.forEach((category) => { %>
+        <option value="<%= category._id %>" <%= item.category && String(item.category._id) === String(category._id) ? "selected" : "" %>>
+          <%= category.name %>
+        </option>
+      <% }) %>
+    </select>
+
+    <label>Quantity</label>
+    <input type="number" name="quantity" min="0" value="<%= item.quantity %>" required />
+
+    <label>Unit</label>
+    <input type="text" name="unit" value="<%= item.unit %>" required />
+
+    <label>Supplier</label>
+    <select name="supplier" required>
+      <% if (!item.supplier) { %>
+        <option value="" selected disabled>Select supplier</option>
+      <% } %>
+      <% suppliers.forEach((supplier) => { %>
+        <option value="<%= supplier._id %>" <%= item.supplier && String(item.supplier._id) === String(supplier._id) ? "selected" : "" %>>
+          <%= supplier.name %>
+        </option>
+      <% }) %>
+    </select>
+
+    <label>Price</label>
+    <input type="number" name="price" min="0" step="0.01" value="<%= item.price %>" required />
+
+    <label>Description</label>
+    <textarea name="description" rows="4"><%= item.description %></textarea>
+
+    <% if (item.imageUrl) { %>
+      <label>Current Image</label>
+      <img src="<%= item.imageUrl %>" alt="<%= item.name %>" style="max-width: 180px; border-radius: 8px; margin-bottom: 1rem;" />
+    <% } %>
+
+    <label>Replace Image</label>
+    <input type="file" name="image" accept="image/*" />
+
+    <button type="submit">Update Item</button>
+  </form>
+</section>
+<%- include("../partials/footer") %>

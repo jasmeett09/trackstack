@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: inventory-management-backend
+    env: node
+    rootDir: inventory-backend
+    buildCommand: npm install && npx prisma generate
+    startCommand: npm start
+    plan: free
+    autoDeploy: true

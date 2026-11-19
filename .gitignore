@@ -1,0 +1,28 @@
+# v0 runtime files
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+
+# Common ignores
+node_modules/
+.next/
+dist/
+coverage/
+.mongodb-binaries/
+.DS_Store
+
+# Local environment files
+.env
+.env.*
+.env*.local
+!.env.example
+
+# Local reference checkout and legacy backend data
+/_repo_review/
+/inventory-backend/categories.json
+/inventory-backend/customers.json
+/inventory-backend/items.json
+/inventory-backend/orders.json
+/inventory-backend/purchases.json
+/inventory-backend/suppliers.json
+/inventory-backend/users.json

@@ -1,0 +1,280 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f6f8;
+  color: #1f2937;
+}
+
+a {
+  color: #0f5b5c;
+  text-decoration: none;
+}
+
+.site-header {
+  background: #0f172a;
+  color: #fff;
+}
+
+.navbar {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand {
+  color: #fff;
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-links a,
+.inline-form button,
+.button {
+  background: #14b8a6;
+  border: none;
+  color: #062c30;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.button.secondary {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 1.5rem auto;
+  padding: 0 1rem 2rem;
+}
+
+.hero,
+.card,
+.form-card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  margin-bottom: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.two-column {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.three-column {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-card form,
+.inline-form {
+  display: inline;
+}
+
+label {
+  display: block;
+  margin-top: 0.9rem;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.6rem;
+}
+
+button {
+  margin-top: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.85rem;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.alert {
+  padding: 0.9rem 1rem;
+  border-radius: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.alert-success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.alert-error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.alert-info {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.hidden {
+  display: none;
+}
+
+.detail-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.detail-list li {
+  padding: 0.65rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.helper-text {
+  color: #475569;
+}
+
+.stat-card p {
+  font-size: 2rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.docs-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.docs-card h2,
+.docs-overview h2,
+.docs-schemas h2 {
+  margin-top: 0;
+}
+
+.docs-endpoint-list {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.docs-endpoint-row {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 0.85rem;
+  align-items: flex-start;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.8rem;
+  padding: 0.85rem;
+}
+
+.docs-endpoint-method {
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.5rem;
+  text-align: center;
+}
+
+.docs-method-get {
+  background: #2563eb;
+}
+
+.docs-method-post {
+  background: #16a34a;
+}
+
+.docs-method-put {
+  background: #d97706;
+}
+
+.docs-method-delete {
+  background: #dc2626;
+}
+
+.docs-endpoint-content code {
+  display: inline-block;
+  background: #e2e8f0;
+  border-radius: 0.45rem;
+  padding: 0.2rem 0.45rem;
+  margin-bottom: 0.45rem;
+}
+
+.docs-endpoint-content p {
+  margin: 0;
+  color: #475569;
+}
+
+.docs-spec-preview {
+  margin: 0;
+  max-height: 480px;
+  overflow: auto;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 0.9rem;
+  padding: 1rem;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .page-heading,
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .docs-endpoint-row {
+    grid-template-columns: 1fr;
+  }
+}

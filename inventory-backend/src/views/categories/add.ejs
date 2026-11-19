@@ -1,0 +1,14 @@
+<%- include("../partials/header") %>
+<section class="form-card">
+  <h1>Add Category</h1>
+  <form action="/categories" method="POST">
+    <label>Name</label>
+    <input type="text" name="name" required />
+
+    <label>Description</label>
+    <textarea name="description" rows="4"></textarea>
+
+    <button type="submit">Create Category</button>
+  </form>
+</section>
+<%- include("../partials/footer") %>

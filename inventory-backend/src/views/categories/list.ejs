@@ -1,0 +1,43 @@
+<%- include("../partials/header") %>
+<section class="page-heading">
+  <div>
+    <h1>Categories</h1>
+    <p>Router-level middleware protects this module.</p>
+  </div>
+  <% if (["admin", "manager"].includes(currentUser.role)) { %>
+    <a class="button" href="/categories/new">Add Category</a>
+  <% } %>
+</section>
+<section class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (!categories.length) { %>
+        <tr><td colspan="3">No categories found.</td></tr>
+      <% } %>
+      <% categories.forEach((category) => { %>
+        <tr>
+          <td><%= category.name %></td>
+          <td><%= category.description || "-" %></td>
+          <td class="actions">
+            <% if (["admin", "manager"].includes(currentUser.role)) { %>
+              <a href="/categories/<%= category._id %>/edit">Edit</a>
+            <% } %>
+            <% if (currentUser.role === "admin") { %>
+              <form action="/categories/<%= category._id %>?_method=DELETE" method="POST" class="inline-form">
+                <button type="submit">Delete</button>
+              </form>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include("../partials/footer") %>

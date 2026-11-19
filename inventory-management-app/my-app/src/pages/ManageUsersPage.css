@@ -1,0 +1,276 @@
+.manage-users-content {
+  flex: 1;
+  padding: 32px;
+  overflow-y: auto;
+}
+
+.manage-users-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.manage-users-header h1 {
+  margin: 0 0 8px;
+  color: #0f172a;
+  font-size: clamp(2rem, 3vw, 2.7rem);
+}
+
+.manage-users-header p,
+.panel-subtitle,
+.tenant-summary-card span,
+.empty-state {
+  color: #64748b;
+  line-height: 1.7;
+}
+
+.tenant-summary-card,
+.manage-users-panel {
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.05);
+}
+
+.tenant-summary-card {
+  min-width: 240px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tenant-summary-label {
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  color: #94a3b8;
+}
+
+.tenant-summary-card strong {
+  color: #0f172a;
+  font-size: 1.2rem;
+}
+
+.manage-users-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.manage-users-panel {
+  padding: 24px;
+}
+
+.manage-users-panel h2 {
+  margin: 0 0 6px;
+  color: #0f172a;
+  font-size: 1.15rem;
+}
+
+.invite-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.invite-form label {
+  color: #0f172a;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.invite-form input,
+.invite-form select,
+.role-select {
+  width: 100%;
+  min-height: 50px;
+  padding: 0 16px;
+  border: 1px solid #dbe3f0;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 0.94rem;
+  box-sizing: border-box;
+}
+
+.invite-form input:focus,
+.invite-form select:focus,
+.role-select:focus {
+  outline: none;
+  border-color: rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.08);
+}
+
+.primary-btn,
+.secondary-btn,
+.danger-btn {
+  min-height: 46px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #ffffff;
+}
+
+.secondary-btn {
+  background: rgba(79, 70, 229, 0.08);
+  color: #4f46e5;
+}
+
+.danger-btn {
+  background: rgba(254, 226, 226, 0.95);
+  color: #dc2626;
+}
+
+.manage-users-error,
+.manage-users-success {
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-weight: 500;
+}
+
+.manage-users-error {
+  background: rgba(254, 242, 242, 0.95);
+  border: 1px solid rgba(252, 165, 165, 0.45);
+  color: #dc2626;
+}
+
+.manage-users-success {
+  background: rgba(240, 253, 244, 0.95);
+  border: 1px solid rgba(134, 239, 172, 0.5);
+  color: #15803d;
+  word-break: break-word;
+}
+
+.invitation-list {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.invitation-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid rgba(226, 232, 240, 0.92);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff, rgba(248, 250, 252, 0.98));
+}
+
+.invitation-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.invitation-email {
+  margin: 0 0 4px;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.invitation-meta {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.members-table-wrapper {
+  margin-top: 16px;
+  overflow-x: auto;
+}
+
+.members-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+.members-table th,
+.members-table td {
+  text-align: left;
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.92);
+}
+
+.members-table th {
+  color: #475569;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.members-table td {
+  color: #0f172a;
+  font-size: 0.92rem;
+}
+
+.role-badge,
+.self-badge {
+  display: inline-flex;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.self-badge,
+.role-admin {
+  background: rgba(79, 70, 229, 0.1);
+  color: #4f46e5;
+}
+
+.role-manager {
+  background: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+}
+
+.role-staff {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+}
+
+@media (max-width: 900px) {
+  .manage-users-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .manage-users-header {
+    flex-direction: column;
+  }
+
+  .tenant-summary-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .manage-users-content {
+    padding: 20px 16px;
+  }
+
+  .invitation-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .invitation-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

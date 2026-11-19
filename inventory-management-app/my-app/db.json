@@ -1,0 +1,174 @@
+{
+  "users": [
+    {
+      "user_id": 1,
+      "name": "Jasmeet Kaur",
+      "email": "user@example.com",
+      "password": "password123",
+      "role": "admin",
+      "id": "0532"
+    },
+    {
+      "user_id": 2,
+      "name": "John Admin",
+      "email": "john@example.com",
+      "password": "admin123",
+      "role": "admin",
+      "id": "0533"
+    },
+    {
+      "user_id": 3,
+      "name": "Sarah Manager",
+      "email": "sarah@example.com",
+      "password": "sarah123",
+      "role": "manager",
+      "id": "0534"
+    }
+  ],
+  "categories": [
+    {
+      "category_id": 1,
+      "category_name": "Groceries",
+      "id": "c868"
+    },
+    {
+      "category_id": 2,
+      "category_name": "Stationery",
+      "id": "1197"
+    },
+    {
+      "category_id": 3,
+      "category_name": "Electronics",
+      "id": "1198"
+    }
+  ],
+  "suppliers": [
+    {
+      "supplier_id": 1,
+      "supplier_name": "Rohan Supplies",
+      "email": "rohan@example.com",
+      "phone_no": "9876543210",
+      "id": "8600"
+    },
+    {
+      "supplier_id": 2,
+      "supplier_name": "Adarsh Traders",
+      "email": "adarsh@example.com",
+      "phone_no": "9123456789",
+      "id": "59ce"
+    },
+    {
+      "supplier_id": 3,
+      "supplier_name": "Global Imports",
+      "email": "global@example.com",
+      "phone_no": "9999888877",
+      "id": "59cf"
+    }
+  ],
+  "items": [
+    {
+      "item_id": 1,
+      "item_name": "Chips",
+      "category_id": 1,
+      "quantity": 4,
+      "unit": "units",
+      "price": 30,
+      "supplier_id": 1,
+      "id": "1d6c"
+    },
+    {
+      "item_id": 2,
+      "item_name": "Blue Pen",
+      "category_id": 2,
+      "quantity": 15,
+      "unit": "units",
+      "price": 20,
+      "supplier_id": 2,
+      "id": "5037"
+    },
+    {
+      "item_id": 3,
+      "item_name": "Black Pen",
+      "category_id": 2,
+      "quantity": 7,
+      "price": 10,
+      "unit": "units",
+      "supplier_id": 2,
+      "id": "ee0b"
+    },
+    {
+      "item_id": 4,
+      "item_name": "Mouse",
+      "category_id": 3,
+      "quantity": 5,
+      "unit": "units",
+      "price": 250,
+      "supplier_id": 3,
+      "id": "ee0c"
+    }
+  ],
+  "orders": [
+    {
+      "id": "69a3",
+      "transaction_id": 1,
+      "transaction_type": "order",
+      "transaction_date": "2025-10-25",
+      "quantity": 5,
+      "item_id": 1,
+      "user_id": 1,
+      "customer_id": 1,
+      "supplier_id": 1
+    },
+    {
+      "id": "0e7a",
+      "item_id": 2,
+      "quantity": 4,
+      "customer_id": 1,
+      "transaction_id": 2,
+      "transaction_type": "order",
+      "user_id": 1,
+      "transaction_date": "2025-11-17",
+      "supplier_id": 2
+    }
+  ],
+  "purchases": [
+    {
+      "id": "3a1c",
+      "transaction_id": 3,
+      "transaction_type": "purchase",
+      "transaction_date": "2025-10-25",
+      "quantity": 10,
+      "item_id": 2,
+      "user_id": 1,
+      "customer_id": 1,
+      "supplier_id": 2
+    },
+    {
+      "id": "dc1a",
+      "item_id": 2,
+      "quantity": 3,
+      "supplier_id": 2,
+      "transaction_id": 4,
+      "transaction_type": "purchase",
+      "user_id": 1,
+      "transaction_date": "2025-11-17",
+      "customer_id": 1
+    }
+  ],
+  "customers": [
+    {
+      "customer_id": 1,
+      "customer_name": "John Doe",
+      "email": "john@example.com",
+      "phone_no": "9999999999",
+      "id": "517b"
+    },
+    {
+      "customer_id": 2,
+      "customer_name": "Jane Smith",
+      "email": "jane@example.com",
+      "phone_no": "8888888888",
+      "id": "517c"
+    }
+  ]
+}

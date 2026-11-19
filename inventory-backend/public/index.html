@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Backend API</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Inventory Backend Running</h1>
+    <p class="port">Port: 3001</p>
+    
+    <section class="api-info">
+      <h2>Available API Endpoints</h2>
+      
+      <div class="endpoint-group">
+        <h3>Items</h3>
+        <ul>
+          <li><code>GET /items</code> - Get all items</li>
+          <li><code>GET /items/:id</code> - Get item by ID</li>
+          <li><code>POST /items</code> - Create new item</li>
+          <li><code>PUT /items/:id</code> - Update item</li>
+          <li><code>DELETE /items/:id</code> - Delete item</li>
+        </ul>
+      </div>
+
+      <div class="endpoint-group">
+        <h3>Categories</h3>
+        <ul>
+          <li><code>GET /categories</code> - Get all categories</li>
+        </ul>
+      </div>
+
+      <div class="endpoint-group">
+        <h3>Suppliers</h3>
+        <ul>
+          <li><code>GET /suppliers</code> - Get all suppliers</li>
+        </ul>
+      </div>
+
+      <div class="endpoint-group">
+        <h3>Users</h3>
+        <ul>
+          <li><code>GET /users</code> - Get all users</li>
+          <li><code>GET /users?email=user@example.com</code> - Find user by email</li>
+          <li><code>POST /users</code> - Create new user (signup)</li>
+        </ul>
+      </div>
+
+      <div class="endpoint-group">
+        <h3>Orders</h3>
+        <ul>
+          <li><code>GET /orders</code> - Get all orders</li>
+          <li><code>POST /orders</code> - Create new order</li>
+          <li><code>PUT /orders/:id</code> - Update order</li>
+          <li><code>DELETE /orders/:id</code> - Delete order</li>
+        </ul>
+      </div>
+
+      <div class="endpoint-group">
+        <h3>Purchases</h3>
+        <ul>
+          <li><code>GET /purchases</code> - Get all purchases</li>
+          <li><code>POST /purchases</code> - Create new purchase</li>
+          <li><code>PUT /purchases/:id</code> - Update purchase</li>
+          <li><code>DELETE /purchases/:id</code> - Delete purchase</li>
+        </ul>
+      </div>
+
+      <div class="endpoint-group">
+        <h3>Customers</h3>
+        <ul>
+          <li><code>GET /customers</code> - Get all customers</li>
+        </ul>
+      </div>
+
+      <div class="endpoint-group">
+        <h3>Utilities</h3>
+        <ul>
+          <li><code>GET /download</code> - Download items.json</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="status">
+      <h2>Status</h2>
+      <p class="success">✓ Server is running successfully</p>
+      <p>Base URL: <code>http://localhost:3001</code></p>
+    </section>
+  </div>
+</body>
+</html>

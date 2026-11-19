@@ -1,0 +1,7 @@
+<% if (success_msg && success_msg.length) { %>
+  <div class="alert alert-success"><%= success_msg[0] %></div>
+<% } %>
+<% if (error_msg && error_msg.length) { %>
+  <div class="alert alert-error"><%= error_msg[0] %></div>
+<% } %>
+<div id="socket-status" class="alert alert-info hidden"></div>

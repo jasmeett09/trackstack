@@ -1,0 +1,26 @@
+<%- include("../partials/header") %>
+<section class="card">
+  <div class="page-heading">
+    <div>
+      <h1><%= item.name %></h1>
+      <p>Item detail page rendered with EJS.</p>
+    </div>
+    <a class="button" href="/items/<%= item._id %>/edit">Edit Item</a>
+  </div>
+  <% if (item.imageUrl) { %>
+    <div style="margin-bottom: 1.5rem;">
+      <img src="<%= item.imageUrl %>" alt="<%= item.name %>" style="max-width: 280px; width: 100%; border-radius: 12px;" />
+    </div>
+  <% } %>
+  <ul class="detail-list">
+    <li><strong>Category:</strong> <%= item.category ? item.category.name : "-" %></li>
+    <li><strong>Supplier:</strong> <%= item.supplier ? item.supplier.name : "-" %></li>
+    <li><strong>Quantity:</strong> <span class="live-quantity"><%= item.quantity %></span> <%= item.unit %></li>
+    <li><strong>Low Stock Threshold:</strong> 10</li>
+    <li><strong>Price:</strong> <%= item.price %></li>
+    <li><strong>Description:</strong> <%= item.description || "No description" %></li>
+    <li><strong>Image:</strong> <%= item.imageUrl ? "Stored in Cloudinary" : "No image" %></li>
+    <li><strong>Created Date:</strong> <%= new Date(item.createdDate).toLocaleDateString() %></li>
+  </ul>
+</section>
+<%- include("../partials/footer") %>

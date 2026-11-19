@@ -1,0 +1,40 @@
+<%- include("../partials/header") %>
+<section class="page-heading">
+  <div>
+    <h1>Sales</h1>
+    <p>Dedicated stock-out records with revenue-focused history.</p>
+  </div>
+  <% if (["admin", "manager"].includes(currentUser.role)) { %>
+    <a class="button" href="/sales/new">Add Sale</a>
+  <% } %>
+</section>
+<section class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Customer</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>User</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (!sales.length) { %>
+        <tr><td colspan="6">No sales available.</td></tr>
+      <% } %>
+      <% sales.forEach((sale) => { %>
+        <tr>
+          <td><%= sale.item ? sale.item.name : "Deleted Item" %></td>
+          <td><%= sale.customerName || "-" %></td>
+          <td><%= sale.quantity %></td>
+          <td><%= sale.sellingPrice %></td>
+          <td><%= sale.performedBy ? sale.performedBy.name : "Unknown" %></td>
+          <td><%= new Date(sale.date).toLocaleString() %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include("../partials/footer") %>

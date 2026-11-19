@@ -1,0 +1,63 @@
+<%- include("../partials/header") %>
+<section class="page-heading">
+  <div>
+    <h1>Items</h1>
+    <p>Manage inventory records using EJS server-rendered pages.</p>
+  </div>
+  <% if (["admin", "manager", "staff"].includes(currentUser.role)) { %>
+    <a class="button" href="/items/new">Add Item</a>
+  <% } %>
+</section>
+
+<section class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Supplier</th>
+        <th>Quantity</th>
+        <th>Unit</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (!items.length) { %>
+        <tr>
+          <td colspan="8">No items available.</td>
+        </tr>
+      <% } %>
+      <% items.forEach((item) => { %>
+        <tr data-item-id="<%= item._id %>">
+          <td>
+            <% if (item.imageUrl) { %>
+              <img src="<%= item.imageUrl %>" alt="<%= item.name %>" style="width: 56px; height: 56px; object-fit: cover; border-radius: 10px;" />
+            <% } else { %>
+              -
+            <% } %>
+          </td>
+          <td><%= item.name %></td>
+          <td><%= item.category ? item.category.name : "-" %></td>
+          <td><%= item.supplier ? item.supplier.name : "-" %></td>
+          <td class="live-quantity"><%= item.quantity %></td>
+          <td><%= item.unit %></td>
+          <td><%= item.price %></td>
+          <td class="actions">
+            <a href="/items/<%= item._id %>">View</a>
+            <% if (["admin", "manager", "staff"].includes(currentUser.role)) { %>
+              <a href="/items/<%= item._id %>/edit">Edit</a>
+            <% } %>
+            <% if (currentUser.role === "admin") { %>
+              <form action="/items/<%= item._id %>?_method=DELETE" method="POST" class="inline-form">
+                <button type="submit">Delete</button>
+              </form>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include("../partials/footer") %>

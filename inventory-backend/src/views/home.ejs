@@ -1,0 +1,36 @@
+<%- include("partials/header") %>
+<section class="hero">
+  <h1>Inventory Management System</h1>
+  <p>
+    This project uses server-side rendering with EJS for pages, MongoDB with
+    Mongoose for data, Passport.js with sessions for login, JWT for protected
+    APIs, and Socket.IO for stock update notifications.
+  </p>
+  <div class="hero-actions">
+    <% if (currentUser) { %>
+      <a class="button" href="/dashboard">Go to Dashboard</a>
+    <% } else { %>
+      <a class="button" href="/register">Create Account</a>
+      <a class="button secondary" href="/login">Login</a>
+    <% } %>
+    <a class="button secondary" href="/docs">API Docs</a>
+  </div>
+</section>
+
+<section class="grid two-column">
+  <div class="card">
+    <h2>SSR with EJS</h2>
+    <p>
+      Pages like dashboard, item list, login, register, and forms are rendered
+      on the server and sent as HTML responses.
+    </p>
+  </div>
+  <div class="card">
+    <h2>JSON API</h2>
+    <p>
+      API routes such as <code>/api/items</code> and
+      <code>/api/profile</code> return JSON to demonstrate API responses.
+    </p>
+  </div>
+</section>
+<%- include("partials/footer") %>

@@ -1,0 +1,20 @@
+<%- include("../partials/header") %>
+<section class="form-card">
+  <h1>Edit Supplier</h1>
+  <form action="/suppliers/<%= supplier._id %>?_method=PUT" method="POST">
+    <label>Name</label>
+    <input type="text" name="name" value="<%= supplier.name %>" required />
+
+    <label>Contact Person</label>
+    <input type="text" name="contactPerson" value="<%= supplier.contactPerson %>" />
+
+    <label>Phone</label>
+    <input type="text" name="phone" value="<%= supplier.phone %>" />
+
+    <label>Address</label>
+    <textarea name="address" rows="4"><%= supplier.address %></textarea>
+
+    <button type="submit">Update Supplier</button>
+  </form>
+</section>
+<%- include("../partials/footer") %>

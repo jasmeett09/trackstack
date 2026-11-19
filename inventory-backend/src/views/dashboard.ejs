@@ -1,0 +1,131 @@
+<%- include("partials/header") %>
+<section class="page-heading">
+  <div>
+    <h1>Dashboard</h1>
+    <p>Welcome, <strong><%= currentUser.name %></strong> (<%= currentUser.email %>)</p>
+    <p>Organization: <strong><%= currentUser.organization ? currentUser.organization.organizationName : "N/A" %></strong></p>
+  </div>
+  <a class="button" href="/auth/token">View JWT Route</a>
+</section>
+
+<section class="grid three-column">
+  <div class="card stat-card">
+    <h2>Total Items</h2>
+    <p><%= stats.totalItems %></p>
+  </div>
+  <div class="card stat-card">
+    <h2>Total Categories</h2>
+    <p><%= stats.totalCategories %></p>
+  </div>
+  <div class="card stat-card">
+    <h2>Total Suppliers</h2>
+    <p><%= stats.totalSuppliers %></p>
+  </div>
+  <div class="card stat-card">
+    <h2>Total Purchases</h2>
+    <p><%= stats.totalPurchases %></p>
+  </div>
+  <div class="card stat-card">
+    <h2>Total Sales</h2>
+    <p><%= stats.totalSales %></p>
+  </div>
+  <div class="card stat-card">
+    <h2>Low Stock Alerts</h2>
+    <p><%= stats.lowStockCount %></p>
+  </div>
+  <div class="card stat-card">
+    <h2>Revenue</h2>
+    <p><%= stats.totalRevenue.toFixed(2) %></p>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Recent Transactions</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Type</th>
+        <th>Quantity</th>
+        <th>User</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (!recentTransactions.length) { %>
+        <tr>
+          <td colspan="5">No transactions yet.</td>
+        </tr>
+      <% } %>
+      <% recentTransactions.forEach((transaction) => { %>
+        <tr>
+          <td><%= transaction.item ? transaction.item.name : "Deleted Item" %></td>
+          <td><%= transaction.transactionType %></td>
+          <td><%= transaction.quantity %></td>
+          <td><%= transaction.performedBy ? transaction.performedBy.name : "Unknown" %></td>
+          <td><%= new Date(transaction.date).toLocaleString() %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+
+<section class="grid two-column" style="margin-top: 1.5rem;">
+  <section class="card">
+    <h2>Low Stock Items</h2>
+    <ul class="detail-list">
+      <% if (!lowStockItems.length) { %>
+        <li>All items are at or above the low-stock threshold of 10.</li>
+      <% } %>
+      <% lowStockItems.forEach((item) => { %>
+        <li>
+          <strong><%= item.name %></strong>:
+          <%= item.quantity %> <%= item.unit %> left (low stock below 10)
+        </li>
+      <% }) %>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Top Selling Products</h2>
+    <ul class="detail-list">
+      <% if (!topSellingProducts.length) { %>
+        <li>No sales data yet.</li>
+      <% } %>
+      <% topSellingProducts.forEach((product) => { %>
+        <li>
+          <strong><%= product.itemName %></strong>:
+          <%= product.unitsSold %> units, revenue <%= product.revenue.toFixed(2) %>
+        </li>
+      <% }) %>
+    </ul>
+  </section>
+</section>
+
+<section class="card" style="margin-top: 1.5rem;">
+  <h2>Recent Activity Logs</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Action</th>
+        <th>Entity</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (!recentActivity.length) { %>
+        <tr>
+          <td colspan="3">No activity logs yet.</td>
+        </tr>
+      <% } %>
+      <% recentActivity.forEach((log) => { %>
+        <tr>
+          <td><%= log.action %></td>
+          <td><%= log.entity %></td>
+          <td><%= new Date(log.timestamp).toLocaleString() %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include("partials/footer") %>

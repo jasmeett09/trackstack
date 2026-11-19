@@ -1,0 +1,40 @@
+<%- include("../partials/header") %>
+<section class="page-heading">
+  <div>
+    <h1>Transactions</h1>
+    <p>Stock-in and stock-out history with user tracking.</p>
+  </div>
+  <% if (["admin", "manager"].includes(currentUser.role)) { %>
+    <a class="button" href="/transactions/new">Add Transaction</a>
+  <% } %>
+</section>
+<section class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Type</th>
+        <th>Quantity</th>
+        <th>User</th>
+        <th>Note</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (!transactions.length) { %>
+        <tr><td colspan="6">No transactions available.</td></tr>
+      <% } %>
+      <% transactions.forEach((transaction) => { %>
+        <tr>
+          <td><%= transaction.item ? transaction.item.name : "Deleted Item" %></td>
+          <td><%= transaction.transactionType %></td>
+          <td><%= transaction.quantity %> <%= transaction.item ? transaction.item.unit : "" %></td>
+          <td><%= transaction.performedBy ? transaction.performedBy.name : "Unknown" %></td>
+          <td><%= transaction.note || "-" %></td>
+          <td><%= new Date(transaction.date).toLocaleString() %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include("../partials/footer") %>

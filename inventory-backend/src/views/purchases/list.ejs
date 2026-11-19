@@ -1,0 +1,40 @@
+<%- include("../partials/header") %>
+<section class="page-heading">
+  <div>
+    <h1>Purchases</h1>
+    <p>Dedicated stock-in records with supplier and pricing history.</p>
+  </div>
+  <% if (["admin", "manager"].includes(currentUser.role)) { %>
+    <a class="button" href="/purchases/new">Add Purchase</a>
+  <% } %>
+</section>
+<section class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Supplier</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>User</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (!purchases.length) { %>
+        <tr><td colspan="6">No purchases available.</td></tr>
+      <% } %>
+      <% purchases.forEach((purchase) => { %>
+        <tr>
+          <td><%= purchase.item ? purchase.item.name : "Deleted Item" %></td>
+          <td><%= purchase.supplier ? purchase.supplier.name : "Deleted Supplier" %></td>
+          <td><%= purchase.quantity %></td>
+          <td><%= purchase.purchasePrice %></td>
+          <td><%= purchase.performedBy ? purchase.performedBy.name : "Unknown" %></td>
+          <td><%= new Date(purchase.date).toLocaleString() %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include("../partials/footer") %>

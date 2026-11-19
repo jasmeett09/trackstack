@@ -1,0 +1,45 @@
+<%- include("../partials/header") %>
+<section class="page-heading">
+  <div>
+    <h1>Suppliers</h1>
+    <p>Supplier records for inventory sourcing.</p>
+  </div>
+  <% if (currentUser.role === "admin") { %>
+    <a class="button" href="/suppliers/new">Add Supplier</a>
+  <% } %>
+</section>
+<section class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Contact Person</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (!suppliers.length) { %>
+        <tr><td colspan="5">No suppliers found.</td></tr>
+      <% } %>
+      <% suppliers.forEach((supplier) => { %>
+        <tr>
+          <td><%= supplier.name %></td>
+          <td><%= supplier.contactPerson || "-" %></td>
+          <td><%= supplier.phone || "-" %></td>
+          <td><%= supplier.address || "-" %></td>
+          <td class="actions">
+            <% if (currentUser.role === "admin") { %>
+              <a href="/suppliers/<%= supplier._id %>/edit">Edit</a>
+              <form action="/suppliers/<%= supplier._id %>?_method=DELETE" method="POST" class="inline-form">
+                <button type="submit">Delete</button>
+              </form>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<%- include("../partials/footer") %>
