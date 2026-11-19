@@ -1,3 +1,4 @@
+const { randomUUID } = require("node:crypto");
 const { prisma } = require("../config/prisma");
 const authService = require("./authService");
 const { getTenantContext } = require("./tenantService");
@@ -121,6 +122,7 @@ const inviteUserToOrganization = async (userId, { email, role }) => {
 
   return prisma.invitation.create({
     data: {
+      id: randomUUID(),
       organizationId: tenant.organizationId,
       invitedById: tenant.userId,
       email: normalizedEmail,
@@ -252,13 +254,18 @@ const revokeOrganizationInvitation = async (actorUserId, invitationId) => {
     throw error;
   }
 
-  return prisma.invitation.update({
-    where: { id: invitation.id },
-    data: { status: "revoked" },
-    include: {
-      organization: true
-    }
-  });
+  try {
+    return await prisma.invitation.update({
+      where: { id: invitation.id, status: "pending", organizationId: tenant.organizationId },
+      data: { status: "revoked" },
+      include: { organization: true }
+    });
+  } catch (error) {
+    if (error.code !== "P2025") throw error;
+    const inactiveInvitation = new Error("Invitation is no longer pending.");
+    inactiveInvitation.statusCode = 409;
+    throw inactiveInvitation;
+  }
 };
 
 const getInvitationDetails = async (invitationId) => {
@@ -324,7 +331,17 @@ const acceptInvitation = async ({ invitationId, name, email, password }) => {
   const hashedPassword = await authService.hashPassword(password);
 
   const user = await prisma.$transaction(async (tx) => {
-    const createdUser = await tx.user.create({
+    const { count } = await tx.invitation.updateMany({
+      where: { id: invitation.id, status: "pending" },
+      data: { status: "accepted" }
+    });
+    if (!count) {
+      const error = new Error("Invitation not found or already used.");
+      error.statusCode = 404;
+      throw error;
+    }
+
+    return tx.user.create({
       data: {
         organizationId: invitation.organizationId,
         name: name.trim(),
@@ -337,12 +354,6 @@ const acceptInvitation = async ({ invitationId, name, email, password }) => {
       }
     });
 
-    await tx.invitation.update({
-      where: { id: invitation.id },
-      data: { status: "accepted" }
-    });
-
-    return createdUser;
   });
 
   return authService.decorateUser(user);

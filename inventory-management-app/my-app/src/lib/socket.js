@@ -1,8 +1,6 @@
 const SOCKET_SCRIPT_ID = 'socket-io-client-script';
 
 let socketPromise = null;
-let activeIdentity = null;
-let connectHandlerBound = false;
 
 const trimTrailingSlash = (value = '') => value.replace(/\/$/, '');
 
@@ -39,18 +37,7 @@ const loadSocketClient = () => new Promise((resolve, reject) => {
   document.body.appendChild(script);
 });
 
-const emitOrganizationJoin = (socket) => {
-  if (!socket || !activeIdentity?.organizationId || !activeIdentity?.userId) {
-    return;
-  }
-
-  socket.emit('organization:join', {
-    organizationId: activeIdentity.organizationId,
-    userId: activeIdentity.userId
-  });
-};
-
-export const getOrganizationSocket = async ({ organizationId, userId }) => {
+const getOrganizationSocket = async () => {
   if (!socketPromise) {
     socketPromise = loadSocketClient().then((io) => {
       if (typeof io !== 'function') {
@@ -58,30 +45,23 @@ export const getOrganizationSocket = async ({ organizationId, userId }) => {
       }
 
       return io(socketBaseUrl || undefined, {
-        withCredentials: true
+        withCredentials: true,
+        autoConnect: false
       });
     });
   }
 
   const socket = await socketPromise;
-  activeIdentity = {
-    organizationId: organizationId?.toString?.() || '',
-    userId: userId?.toString?.() || ''
-  };
-
-  if (!connectHandlerBound) {
-    socket.on('connect', () => {
-      emitOrganizationJoin(socket);
-    });
-    connectHandlerBound = true;
-  }
-
-  emitOrganizationJoin(socket);
+  if (!socket.active) socket.connect();
   return socket;
 };
 
-export const subscribeToOrganizationSocket = async ({ organizationId, userId, handlers = {} }) => {
-  const socket = await getOrganizationSocket({ organizationId, userId });
+export const disconnectOrganizationSocket = () => {
+  socketPromise?.then((socket) => socket.disconnect()).catch(() => {});
+};
+
+export const subscribeToOrganizationSocket = async ({ handlers = {} }) => {
+  const socket = await getOrganizationSocket();
   const entries = Object.entries(handlers).filter(([, handler]) => typeof handler === 'function');
 
   entries.forEach(([eventName, handler]) => {

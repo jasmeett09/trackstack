@@ -24,8 +24,9 @@ const decorateUser = (user) => {
     return null;
   }
 
+  const { password, ...profile } = user;
   return {
-    ...user,
+    ...profile,
     _id: user.id,
     organization: decorateOrganization(user.organization)
   };

@@ -15,6 +15,7 @@ import useCursorInteractions from './hooks/useCursorInteractions';
 import './App.css';
 import './cursor-interactions.css';
 import { api } from './lib/api';
+import { disconnectOrganizationSocket } from './lib/socket';
 
 function App() {
   useCursorInteractions();
@@ -61,6 +62,7 @@ function App() {
   };
 
   const handleLogout = async () => {
+    disconnectOrganizationSocket();
     try {
       await api.post('/api/auth/logout', {});
     } catch {

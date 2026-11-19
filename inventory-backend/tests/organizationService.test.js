@@ -133,7 +133,7 @@ describe("organizationService guardrails", () => {
     const result = await organizationService.revokeOrganizationInvitation("admin-1", "invite-1");
 
     expect(prisma.invitation.update).toHaveBeenCalledWith({
-      where: { id: "invite-1" },
+      where: { id: "invite-1", status: "pending", organizationId: "org-1" },
       data: { status: "revoked" },
       include: { organization: true }
     });

@@ -1,11 +1,11 @@
 const path = require("path");
 const express = require("express");
-const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const flash = require("connect-flash");
 const methodOverride = require("method-override");
 const passport = require("./config/passport");
 const keys = require("./config/keys");
+const { createSessionMiddleware } = require("./config/session");
 const { apiLimiter, securityHeaders } = require("./config/security");
 
 const loggerMiddleware = require("./middlewares/loggerMiddleware");
@@ -34,6 +34,12 @@ app.use(securityHeaders);
 app.use((req, res, next) => {
   const requestOrigin = req.headers.origin;
   const isAllowedOrigin = requestOrigin && keys.allowedOrigins.includes(requestOrigin);
+  const isSameOrigin = requestOrigin === `${req.protocol}://${req.get("host")}`;
+  const isSafeMethod = ["GET", "HEAD", "OPTIONS"].includes(req.method);
+
+  if (requestOrigin && !isAllowedOrigin && !isSameOrigin && !isSafeMethod) {
+    return res.status(403).json({ message: "Request origin is not allowed." });
+  }
 
   if (isAllowedOrigin) {
     res.header("Access-Control-Allow-Origin", requestOrigin);
@@ -55,18 +61,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(methodOverride("_method"));
-app.use(
-  session({
-    secret: keys.sessionSecret,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: keys.isProduction,
-      sameSite: keys.isProduction ? "none" : "lax",
-      maxAge: 24 * 60 * 60 * 1000
-    }
-  })
-);
+app.locals.sessionMiddleware = createSessionMiddleware();
+app.use(app.locals.sessionMiddleware);
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());

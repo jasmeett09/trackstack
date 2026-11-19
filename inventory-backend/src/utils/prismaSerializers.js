@@ -68,6 +68,12 @@ const mapSale = (sale) => {
   };
 };
 
+const mapInvitationDetails = ({ email, role, organizationName } = {}) => ({
+  email,
+  role,
+  organizationName
+});
+
 const mapActivityLog = (log) => {
   if (!log) {
     return null;
@@ -77,7 +83,7 @@ const mapActivityLog = (log) => {
     id: log._id?.toString?.() || log.id || "",
     action: log.action,
     entity: log.entity,
-    details: log.details || {},
+    details: log.entity === "Invitation" ? mapInvitationDetails(log.details || {}) : log.details || {},
     timestamp: log.timestamp || log.createdAt
   };
 };
@@ -107,6 +113,7 @@ const mapNotification = (notification, currentUserId = "") => {
   const id = notification._id?.toString?.() || notification.id || "";
   const readBy = notification.readBy || [];
   const normalizedUserId = currentUserId?.toString?.() || "";
+  const isInvitation = notification.entity === "Invitation" || notification.type?.startsWith("organization.invitation.");
 
   return {
     id,
@@ -115,8 +122,8 @@ const mapNotification = (notification, currentUserId = "") => {
     title: notification.title,
     message: notification.message,
     entity: notification.entity || "",
-    entityId: notification.entityId || "",
-    metadata: notification.metadata || {},
+    entityId: isInvitation ? "" : notification.entityId || "",
+    metadata: isInvitation ? mapInvitationDetails(notification.metadata || {}) : notification.metadata || {},
     createdAt: notification.createdAt || notification.timestamp,
     isRead: normalizedUserId ? readBy.includes(normalizedUserId) : false
   };

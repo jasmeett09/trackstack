@@ -4,6 +4,7 @@ const authService = require("../services/authService");
 const auditLogService = require("../services/auditLogService");
 const notificationService = require("../services/notificationService");
 const organizationService = require("../services/organizationService");
+const { disconnectSessionSockets } = require("../config/socket");
 
 const tokenCookieOptions = () => ({
   httpOnly: true,
@@ -77,6 +78,7 @@ exports.login = (req, res, next) => {
 
 exports.logout = (req, res, next) => {
   const activeUser = req.user;
+  const sessionId = req.sessionID;
   req.logout((error) => {
     if (error) {
       return next(error);
@@ -87,6 +89,7 @@ exports.logout = (req, res, next) => {
         return next(sessionError);
       }
 
+      disconnectSessionSockets(sessionId);
       res.clearCookie("connect.sid");
       res.clearCookie("token");
       if (activeUser) {
@@ -195,6 +198,7 @@ exports.apiLogin = (req, res, next) => {
 
 exports.apiLogout = (req, res, next) => {
   const activeUser = req.user;
+  const sessionId = req.sessionID;
   req.logout((error) => {
     if (error) {
       return next(error);
@@ -205,6 +209,7 @@ exports.apiLogout = (req, res, next) => {
         return next(sessionError);
       }
 
+      disconnectSessionSockets(sessionId);
       res.clearCookie("connect.sid");
       res.clearCookie("token");
       if (activeUser) {
@@ -272,7 +277,6 @@ exports.apiAcceptInvitation = asyncHandler(async (req, res, next) => {
     title: "New team member joined",
     message: `${invitedUser.name} joined the organization as ${invitedUser.role}.`,
     entity: "Invitation",
-    entityId: req.body.invitationId,
     metadata: {
       email: invitedUser.email,
       role: invitedUser.role,

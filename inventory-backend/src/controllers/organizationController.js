@@ -4,6 +4,7 @@ const auditTrailService = require("../services/auditTrailService");
 const notificationService = require("../services/notificationService");
 const organizationService = require("../services/organizationService");
 const { buildOpenApiSpec } = require("../config/openapi");
+const { disconnectUserSockets } = require("../config/socket");
 
 exports.apiOrganizationSummary = asyncHandler(async (req, res) => {
   const organization = await organizationService.getOrganizationSummary(req.user._id || req.user.id);
@@ -72,7 +73,6 @@ exports.apiInviteUser = asyncHandler(async (req, res) => {
     action: "organization.invited_user",
     entity: "Invitation",
     details: {
-      invitationId: invitation.id,
       email: invitation.email,
       role: invitation.role
     }
@@ -85,11 +85,9 @@ exports.apiInviteUser = asyncHandler(async (req, res) => {
     title: "New team invitation created",
     message: `${invitation.email} was invited as ${invitation.role}.`,
     entity: "Invitation",
-    entityId: invitation.id,
     metadata: {
       email: invitation.email,
-      role: invitation.role,
-      inviteLink
+      role: invitation.role
     }
   });
 
@@ -159,6 +157,7 @@ exports.apiRemoveOrganizationUser = asyncHandler(async (req, res) => {
     req.user._id || req.user.id,
     req.params.userId
   );
+  disconnectUserSockets(removedUser.id);
 
   await auditLogService.logActivity({
     organizationId: req.user.organizationId,
@@ -203,7 +202,6 @@ exports.apiRevokeInvitation = asyncHandler(async (req, res) => {
     action: "organization.revoked_invitation",
     entity: "Invitation",
     details: {
-      invitationId: invitation.id,
       email: invitation.email,
       role: invitation.role
     }
@@ -216,7 +214,6 @@ exports.apiRevokeInvitation = asyncHandler(async (req, res) => {
     title: "Invitation revoked",
     message: `The invite for ${invitation.email} was revoked.`,
     entity: "Invitation",
-    entityId: invitation.id,
     metadata: {
       email: invitation.email,
       role: invitation.role

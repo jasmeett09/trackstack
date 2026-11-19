@@ -1,16 +1,24 @@
 const http = require("http");
-const app = require("./src/app");
 const connectDB = require("./src/config/db");
-const { connectPrisma } = require("./src/config/prisma");
 const keys = require("./src/config/keys");
 const { initSocket } = require("./src/config/socket");
 
 const startServer = async () => {
+  if (keys.isProduction) {
+    const requiredKeys = ["DATABASE_URL", "MONGO_URI", "SESSION_SECRET", "JWT_SECRET"];
+    const missingKeys = requiredKeys.filter((key) => !process.env[key]?.trim());
+    if (missingKeys.length) {
+      throw new Error(`Missing production environment variables: ${missingKeys.join(", ")}`);
+    }
+  }
+
+  const { connectPrisma } = require("./src/config/prisma");
   await connectDB();
   await connectPrisma();
 
+  const app = require("./src/app");
   const server = http.createServer(app);
-  const io = initSocket(server);
+  const io = initSocket(server, app.locals.sessionMiddleware);
   app.locals.io = io;
 
   server.listen(keys.port, () => {
